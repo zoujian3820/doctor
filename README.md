@@ -19,7 +19,7 @@ $ yarn start
 $ yarn generate
 ```
 ```
-yarn add --save-dev @commitlint/config-conventional @commitlint/cli -g
+yarn add --save-dev @commitlint/config-conventional @commitlint/cli
 yarn add --dev husky
 echo > commitlint.config.js
   module.exports = {

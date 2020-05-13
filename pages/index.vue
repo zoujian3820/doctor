@@ -15,8 +15,8 @@
           class="button--green"
           tid="5222"
           ooo="5633"
-        >
-          Documentation6
+          >Documentation6FGDFRTGERTGDSFS 奔奔地吉大南校夺圭克格勃 fdfsd
+          sdfsdfsdafsd
         </a>
         <a
           href="https://github.com/nuxt/nuxt.js"
