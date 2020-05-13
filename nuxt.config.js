@@ -1,5 +1,12 @@
 module.exports = {
   mode: 'universal',
+  server: {
+    host: '0.0.0.0',
+    port: 3000
+  },
+  router: {
+    base: '/kwdoctor/'
+  },
   /*
    ** Headers of the page
    */
