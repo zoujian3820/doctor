@@ -16,7 +16,7 @@
           tid="5222"
           ooo="5633"
         >
-          Documentation
+          Documentation6
         </a>
         <a
           href="https://github.com/nuxt/nuxt.js"
