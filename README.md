@@ -18,6 +18,15 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
+
+**添加 sass**
+
+```
+yarn add css-loader node-sass postcss-loader sass-loader style-loader -D
+```
+
+**添加 husky + commitlint**
+
 ```
 yarn add --save-dev @commitlint/config-conventional @commitlint/cli
 yarn add --dev husky
@@ -35,4 +44,5 @@ echo > commitlint.config.js
     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
 }
 ```
+
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

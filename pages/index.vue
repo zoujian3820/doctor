@@ -1,51 +1,31 @@
 <template>
   <div class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        kwdoctor
-      </h1>
-      <h2 class="subtitle">
-        My wicked Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-          tid="5222"
-          ooo="5633"
-          >Documentation6FGDFRTGERTGDSFS 奔奔地吉大南校夺圭克格勃 fdfsd
-          sdfsdfsdafsd
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      555
     </div>
+    <img
+      preview="2"
+      src="https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_b.jpg"
+      alt=""
+    />
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
-  },
+  components: {},
   data() {
     return {
       a: 6
     }
+  },
+  mounted() {
+    console.log(this.$previewRefresh, this.$mat)
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -53,27 +33,8 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+  div {
+    color: red;
+  }
 }
 </style>

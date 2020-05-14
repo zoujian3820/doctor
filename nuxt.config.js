@@ -1,3 +1,4 @@
+const isDev = !(process.env.NODE_ENV === 'production')
 module.exports = {
   mode: 'universal',
   server: {
@@ -34,7 +35,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['@plugins'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -47,7 +48,21 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ['@nuxtjs/axios'],
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+    prefix: isDev ? '/api/' : '/',
+    debug: false,
+    proxy: true,
+    progress: false,
+    timeout: 5000,
+    responseType: 'json',
+    credentials: true
+  },
+  proxy: {
+    '/api/': { target: 'http://localhost:6484', pathRewrite: { '^/api/': '' } }
+    // '/api/': { target: 'http://localhost:3000', pathRewrite: { '^/api/': '' } }
+  },
   /*
    ** Build configuration
    */

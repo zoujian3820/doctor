@@ -88,3 +88,9 @@ sw.*
 
 # Vim swap files
 *.swp
+
+
+.huskyrc
+commitlint.config.js
+
+static/lib/vue-photo-preview/
