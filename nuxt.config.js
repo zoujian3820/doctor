@@ -31,7 +31,10 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['~/assets/styles/app.scss'],
+  styleResources: {
+    scss: ['~/assets/styles/init.scss']
+  },
   /*
    ** Plugins to load before mounting the App
    */
@@ -70,6 +73,13 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+    postcss: [
+      require('postcss-px2rem-exclude')({
+        remUnit: 37.5,
+        exclude: '/node_modules|mint-ui/'
+      }),
+      require('autoprefixer')
+    ],
     extend(config, ctx) {}
   }
 }

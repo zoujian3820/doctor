@@ -47,6 +47,7 @@
     "node-sass": "^4.14.1",
     "nodemon": "^1.18.9",
     "postcss-loader": "^3.0.0",
+    "postcss-px2rem-exclude": "^0.0.6",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",

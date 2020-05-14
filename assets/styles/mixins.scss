@@ -1,0 +1,44 @@
+@mixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin visible() {
+  opacity: 1;
+  visibility: visible;
+}
+
+@mixin hidden() {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@mixin backdrop-blur($blur-radius: 5px) {
+  backdrop-filter: blur($blur-radius);
+}
+
+@mixin box-shadow($alpha: 0.6, $blur-radius: 8px) {
+  box-shadow: rgba($black, $alpha) 0 0 $blur-radius;
+}
+
+@mixin transform-transition($time: $transition-time) {
+  transition: transform $time;
+}
+
+@mixin clamp($lines: 2) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}
+
+@mixin text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0, 0, 0, 0.4)) {
+  text-shadow: $x $y $blur $color;
+}
+
+@mixin flex-box($justifyContent: flex-start, $alignItems: flex-start) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
