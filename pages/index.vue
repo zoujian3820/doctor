@@ -3,16 +3,22 @@
     <div>
       555
     </div>
+    <van-button type="primary">主要按f钮</van-button>
   </div>
 </template>
 
 <script>
+import { Button } from 'vant'
 export default {
-  components: {},
+  components: {
+    'van-button': Button
+  },
   data() {
     return {}
   },
-  mounted() {}
+  mounted() {
+    console.log(this.$mat)
+  }
 }
 </script>
 

@@ -45,4 +45,11 @@ echo > commitlint.config.js
 }
 ```
 
+**添加 vant**
+
+```$xslt
+yarn add vant
+yarn add babel-plugin-import less less-loader -D
+```
+
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

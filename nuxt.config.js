@@ -73,6 +73,22 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+    // 添加这个是关键，添加后babel才会处理依赖包vant里面的代码
+    transpile: [/vant.*?less/],
+    babel: {
+      plugins: [
+        [
+          'import',
+          {
+            libraryName: 'vant',
+            style: (name) => {
+              return `${name}/style/less.js`
+            }
+          },
+          'vant'
+        ]
+      ]
+    },
     postcss: [
       require('postcss-px2rem-exclude')({
         remUnit: 37.5,
