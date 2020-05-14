@@ -28,6 +28,7 @@
     "express": "^4.16.4",
     "mta-h5-analysis": "^2.0.15",
     "nuxt": "^2.0.0",
+    "vant": "^2.8.1",
     "weixin-js-sdk": "^1.4.0-test"
   },
   "devDependencies": {
