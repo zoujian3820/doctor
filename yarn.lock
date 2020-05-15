@@ -1558,11 +1558,6 @@
     "@types/webpack" "*"
     terser "^4.3.9"
 
-"@types/ua-parser-js@^0.7.33":
-  version "0.7.33"
-  resolved "http://r.cnpmjs.org/@types/ua-parser-js/download/@types/ua-parser-js-0.7.33.tgz#4a92089511574e12928a7cb6b99a01831acd1dd7"
-  integrity sha1-SpIIlRFXThKSiny2uZoBgxrNHdc=
-
 "@types/uglify-js@*":
   version "3.9.1"
   resolved "http://r.cnpmjs.org/@types/uglify-js/download/@types/uglify-js-3.9.1.tgz#0ad39d6a72979593f669acdfc7e980d590d3fb94"
@@ -4009,6 +4004,11 @@ dot-prop@^5.2.0:
   integrity sha512-uEUyaDKoSQ1M4Oq8l45hSE26SnTxL6snNnqvK/VWx5wJhmff5z0FUVJDKDanor/6w3kzE3i7XZOk+7wC0EXr1A==
   dependencies:
     is-obj "^2.0.0"
+
+driver.js@^0.9.8:
+  version "0.9.8"
+  resolved "http://r.cnpmjs.org/driver.js/download/driver.js-0.9.8.tgz#4b327f4537b1c9b9fb19419de86174be821ae32a"
+  integrity sha1-SzJ/RTexybn7GUGd6GF0voIa4yo=
 
 duplexer3@^0.1.4:
   version "0.1.4"

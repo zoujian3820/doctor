@@ -1,3 +1,4 @@
+// 获取浏览器和系统的信息
 const parser = require('ua-parser-js')
 
 export const uaParser = (userAgent: string) => {
@@ -15,6 +16,7 @@ export const uaParser = (userAgent: string) => {
     isChrome: isBrowser(['Chrome', 'Chromium']),
     isSafari: isBrowser(['Safari']),
     isWechat: isBrowser(['Wechat']),
+    isToutiao: parseResult.ua.includes('Toutiao'),
     isIos: parseResult.os.name === 'iOS',
     isAndroid: parseResult.os.name === 'Android',
     isMobile: parseResult.device.type === 'mobile'
