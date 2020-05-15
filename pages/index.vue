@@ -14,6 +14,7 @@
         <div class="title">实际内容实际内容实际内容实际内容实际内容</div>
       </van-skeleton>
     </div>
+    <van-nav-bar title="标题" left-text="返回" right-text="按钮" left-arrow />
   </div>
 </template>
 
@@ -28,10 +29,11 @@
   avatar-size	头像占位图大小	number | string	32px
   avatar-shape	头像占位图形状，可选值为square	string	round
    */
-import { Button } from 'vant'
+import { Button, NavBar } from 'vant'
 export default {
   components: {
-    'van-button': Button
+    'van-button': Button,
+    [NavBar.name]: NavBar
   },
   data() {
     return {

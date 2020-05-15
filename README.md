@@ -71,6 +71,24 @@ build: {
   }
 }
 
+// 主题定制, 在build下插入loaders
+less-loader不能用6.0，刚升级的有兼容问题，改用5.0
+https://github.com/ant-design/ant-design-landing/issues/235
+
+$ yarn remove less-loader
+$ yarn add less-loader@5.0.0 -D
+$ yarn dev
+
+loaders: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {
+          hack: `true; @import "${resolve(
+            './assets/styles/vant_theme_var.less'
+          )}";`
+        }
+      }
+    }
 ```
 
 **添加 rem 支持**

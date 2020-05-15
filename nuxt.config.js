@@ -1,6 +1,6 @@
 const isDev = !(process.env.NODE_ENV === 'production')
-// const path = require('path')
-// const resolve = (dir) => path.join(__dirname, dir)
+const path = require('path')
+const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
   mode: 'universal',
@@ -40,8 +40,7 @@ module.exports = {
    */
   css: ['~/assets/styles/app.scss'],
   styleResources: {
-    scss: ['~/assets/styles/init.scss'],
-    less: '~/assets/**/*.less'
+    scss: ['~/assets/styles/init.scss']
   },
   /*
    ** Plugins to load before mounting the App
@@ -96,17 +95,16 @@ module.exports = {
           'vant'
         ]
       ]
-      // loaders: {
-      //   // VantUI 定制主题配置
-      //   less: {
-      //     javascriptEnabled: true, // 开启 Less 行内 JavaScript 支持
-      //     modifyVars: {
-      //       hack: `true; @import "${resolve(
-      //         './assets/styles/vant_theme_var.less'
-      //       )}";`
-      //     }
-      //   }
-      // }
+    },
+    loaders: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {
+          hack: `true; @import "${resolve(
+            './assets/styles/vant_theme_var.less'
+          )}";`
+        }
+      }
     },
     postcss: [
       require('postcss-px2rem-exclude')({
