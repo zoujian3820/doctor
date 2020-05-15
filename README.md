@@ -45,6 +45,36 @@ echo > commitlint.config.js
 }
 ```
 
+**webstorm+Prettier+ESLint实现保存格式化代码**
+```
+Prettier
+File” >> "Settings" >> "Tools" >> "File Watchers" >> 新建 Prettier
+
+Any
+All Places
+$ProjectFileDir$\node_modules\.bin\prettier.cmd
+--write $FilePathRelativeToProjectRoot$
+$FilePathRelativeToProjectRoot$
+$ProjectFileDir$
+
+ESLint
+File” >> "Settings" >> "Tools" >> "File Watchers" >> 新建 ESLint
+
+Any
+All Places
+$ProjectFileDir$\node_modules\.bin\eslint.cmd
+--fix $FilePathRelativeToProjectRoot$
+$FilePathRelativeToProjectRoot$
+$ProjectFileDir$
+
+关闭自动保存
+File” >> "Settings" >> "Tools" >> "File Watchers" >> Prettier || ESLint
+关掉 Auto-save edited files to trigger the watcher
+
+File” >> "Settings" >> "Appearance & Behavior" >> "system settings"
+关掉 synchronization下面的四个选项
+```
+
 **添加 vant**
 
 ```bash
