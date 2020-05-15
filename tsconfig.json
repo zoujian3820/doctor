@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "lib": ["dom", "es2016"],
+    "target": "es5",
+    "allowJs": true
+  },
+  //  "include": ["./pages/**/*"],
+  "exclude": ["node_modules", ".nuxt", "dist"]
+}

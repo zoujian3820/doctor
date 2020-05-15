@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      555
+      {{ 'dddd' | firstUpperCase }}
     </div>
     <van-button type="primary">主要按f钮</van-button>
   </div>
@@ -9,6 +9,7 @@
 
 <script>
 import { Button } from 'vant'
+import { uaParser } from '~/transformers/ua'
 export default {
   components: {
     'van-button': Button
@@ -17,7 +18,7 @@ export default {
     return {}
   },
   mounted() {
-    console.log(this.$mat)
+    console.log(this.$mat, uaParser(navigator.userAgent))
   }
 }
 </script>

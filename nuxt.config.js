@@ -1,4 +1,5 @@
 const isDev = !(process.env.NODE_ENV === 'production')
+// const path = require('path')
 module.exports = {
   mode: 'universal',
   server: {
@@ -100,6 +101,23 @@ module.exports = {
       }),
       require('autoprefixer')
     ],
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      config.resolve.extensions.unshift('.ts')
+      config.module.rules.push({
+        test: /\.(tsx|ts)?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
+      })
+
+      if (ctx.isClient) {
+        // 添加 alias 配置
+        // Object.assign(config.resolve.alias, {
+        //   transformers: path.resolve(__dirname, 'transformers')
+        // })
+      }
+    }
   }
 }

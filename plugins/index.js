@@ -3,3 +3,5 @@ import './mtah5'
 
 // rem适配
 import './rem'
+
+import './extend'

@@ -27,7 +27,7 @@ yarn add css-loader node-sass postcss-loader sass-loader style-loader -D
 
 **添加 husky + commitlint**
 
-```
+```bash
 yarn add --save-dev @commitlint/config-conventional @commitlint/cli
 yarn add --dev husky
 echo > commitlint.config.js
@@ -47,9 +47,103 @@ echo > commitlint.config.js
 
 **添加 vant**
 
-```$xslt
+```bash
 yarn add vant
 yarn add babel-plugin-import less less-loader -D
+
+// webpack
+build: {
+  // 添加这个是关键，添加后babel才会处理依赖包vant里面的代码
+  transpile: [/vant.*?less/],
+  babel: {
+     plugins: [
+        [
+           'import',
+           {
+              libraryName: 'vant',
+              style: (name) => {
+                 return `${name}/style/less.js`
+              }
+          },
+          'vant'
+        ]
+     ]
+  }
+}
+
+```
+
+**添加 rem 支持**
+
+```bash
+yarn add postcss-px2rem-exclude lib-flexible -D
+```
+
+```
+// webpack
+build: {
+  postcss: [
+     require('postcss-px2rem-exclude')({
+        remUnit: 37.5,
+        exclude: '/node_modules|mint-ui/'
+     }),
+     require('autoprefixer')
+  ]
+}
+
+if (process.client) {
+  require('lib-flexible/flexible')
+}
+```
+
+**添加 Ts**
+
+```bash
+yarn add @nuxt/typescript-build ts-loader typescript -D
+// 新建 tsconfig.json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "lib": ["dom","es2016"],
+    "target": "es5",
+    "allowJs": true
+  },
+  "exclude": ["node_modules", ".nuxt", "dist"]
+}
+
+// webpack
+build: {
+  extend (config, ctx) {
+     config.resolve.extensions.unshift('.ts')
+     config.module.rules.push({
+        test: /\.(tsx|ts)?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+           appendTsSuffixTo: [/\.vue$/]
+       }
+     })
+  }
+}
+
+新建 /types/vue-shims.d.ts
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import { Route } from 'vue-router'
+declare module '*.vue' {
+  import Vue from 'vue'
+  export default Vue
+}
+// 扩充
+declare module 'vue/types/vue' {
+  interface Vue {
+    $router: VueRouter
+    $route: Route
+  }
+}
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

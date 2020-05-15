@@ -28,12 +28,14 @@
     "express": "^4.16.4",
     "mta-h5-analysis": "^2.0.15",
     "nuxt": "^2.0.0",
+    "ua-parser-js": "^0.7.21",
     "vant": "^2.8.1",
     "weixin-js-sdk": "^1.4.0-test"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@nuxt/typescript-build": "^0.6.6",
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/stylelint-module": "^3.1.0",
@@ -56,6 +58,8 @@
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
-    "stylelint": "^10.1.0"
+    "stylelint": "^10.1.0",
+    "ts-loader": "^7.0.4",
+    "typescript": "^3.9.2"
   }
 }
