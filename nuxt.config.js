@@ -100,9 +100,7 @@ module.exports = {
       less: {
         javascriptEnabled: true,
         modifyVars: {
-          hack: `true; @import "${resolve(
-            './assets/styles/vant_theme_var.less'
-          )}";`
+          hack: `true; @import "${resolve('./assets/styles/vantVar.less')}";`
         }
       }
     },
