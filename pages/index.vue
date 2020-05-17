@@ -30,7 +30,10 @@
   avatar-shape	头像占位图形状，可选值为square	string	round
    */
 import { Button, NavBar } from 'vant'
+import { mapGetters, mapState, mapMutations, mapActions } from 'vuex'
+import storage from 'good-storage'
 import { uaParser } from '~/transformers/ua'
+
 export default {
   components: {
     'van-button': Button,
@@ -41,12 +44,37 @@ export default {
       loading: true
     }
   },
+  computed: {
+    ...mapState({
+      selectHerbs: (state) => state.onlinePrescription.selectHerbs,
+      allHerbs: (state) => state.onlinePrescription.allHerbs
+    }),
+    ...mapGetters(['onlinePrescription/selectHerbs'])
+  },
   mounted() {
     console.log(this.$mat, uaParser(navigator.userAgent))
+    console.log(this.selectHerbs)
+    console.log(this.$store.state.onlinePrescription.selectHerbs)
+
+    this.fetchAllHerbs({
+      remove: 0,
+      mid: 1,
+      pharmacyId: 2
+    })
+    this.$store.commit('onlinePrescription/updateSelectHerbs', [1, 2])
+    this.$store.dispatch('onlinePrescription/fetchAllHerbs', { remove: 1 })
     // this.$toast('66666')
     // this.$confirm({ message: '弹窗内容' })
+    storage.set('test0', 'abc')
+    console.log(storage.get('test0', '123'))
   },
   methods: {
+    ...mapMutations({
+      updateSelectHerbs: 'onlinePrescription/updateSelectHerbs'
+    }),
+    ...mapActions({
+      fetchAllHerbs: 'onlinePrescription/fetchAllHerbs'
+    }),
     preview() {
       this.$imagePreview({
         images: [

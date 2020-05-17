@@ -5197,6 +5197,11 @@ gonzales-pe@^4.2.3:
   dependencies:
     minimist "^1.2.5"
 
+good-storage@^1.1.1:
+  version "1.1.1"
+  resolved "http://r.cnpmjs.org/good-storage/download/good-storage-1.1.1.tgz#081501c01607d5fee2a214f94e8f5f9cb994789f"
+  integrity sha1-CBUBwBYH1f7iohT5To9fnLmUeJ8=
+
 got@^6.7.1:
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/got/-/got-6.7.1.tgz#240cd05785a9a18e561dc1b44b41c763ef1e8db0"

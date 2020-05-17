@@ -6,25 +6,28 @@ export const state = () => ({
 })
 
 export const getters = {
-  selectList: (state) => state.selectList
+  selectHerbs: (state) => state.selectHerbs
 }
 
 export const mutations = {
   updateSelectHerbs(state, payload = []) {
     state.selectHerbs = payload
+  },
+  updateAllHerbs(state, payload = []) {
+    state.allHerbs = payload
   }
 }
 
 export const actions = {
   fetchAllHerbs({ commit, state }, { remove, ...payload }) {
     if (remove) {
-      return commit('updateSelectHerbs', [])
+      return commit('updateAllHerbs', [])
     }
-    return this.$fetch
+    this._vm.$fetch
       .getAllHerbs(this, payload)
-      .then((res) => {
-        commit('updateSelectHerbs', res)
+      .then(({ data: { herbs } }) => {
+        commit('updateAllHerbs', herbs)
       })
-      .catch(() => commit('updateSelectHerbs', []))
+      .catch(() => commit('updateAllHerbs', []))
   }
 }

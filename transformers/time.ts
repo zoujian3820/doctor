@@ -17,7 +17,7 @@ const textMap = {
 }
 
 // 相对时间过滤器，传入时间，返回距离今天有多久
-export const timeAgo = (time: string | Date, language: string) => {
+export const timeAgo = (time: string | Date) => {
   time = time instanceof Date ? time : new Date(time)
 
   const between = Date.now() / 1000 - Number(time) / 1000
@@ -52,7 +52,7 @@ export const timeAgo = (time: string | Date, language: string) => {
 }
 
 // YMDHMS 时间转换过滤器
-export const toYMD = (date: string, language: string) => {
+export const toYMD = (date: string) => {
   if (!date) {
     return date
   }

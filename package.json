@@ -28,6 +28,7 @@
     "cross-env": "^5.2.0",
     "driver.js": "^0.9.8",
     "express": "^4.16.4",
+    "good-storage": "^1.1.1",
     "mockjs": "^1.1.0",
     "mta-h5-analysis": "^2.0.15",
     "nuxt": "^2.0.0",

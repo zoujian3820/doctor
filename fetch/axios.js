@@ -10,8 +10,9 @@ export default (app) => {
   const route = app.$route
   const navigateTo = app.navigateTo
   const navigateRepl = app.navigateRepl
-  const query = axios.query || (route && route.query)
+  const query = axios.query || (route && route.query) || ''
   const { miniToken } = query
+
   // axios.defaults.baseURL = ''
 
   // 用于小程序给微信公众号登录token
@@ -46,13 +47,13 @@ export default (app) => {
           isObject(config.data) &&
             (config.data = {
               ...config.data,
-              _t: +new Date()
+              timestamp: +new Date()
             })
           break
         case 'get':
           config.params = {
             ...config.params,
-            _t: +new Date()
+            timestamp: +new Date()
           }
           break
       }
@@ -74,7 +75,7 @@ export default (app) => {
         console.error(data.msg)
       }
     }
-    return response
+    return response.data
   })
 
   axios.onError((error) => {

@@ -5,12 +5,14 @@
 <script>
 export default {
   name: 'Index',
+  computed: {},
   mounted() {
     this.getPharmacy()
   },
   methods: {
     async getPharmacy() {
-      await this.$fetch.getPharmacys(this, 1)
+      const data = await this.$fetch.getPharmacys(this, 1)
+      console.log(data)
     }
   },
   head() {
