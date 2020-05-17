@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     async getPharmacy() {
-      await this.$fetch.getOnlinePrescreptionPharmacy(this, 1)
+      await this.$fetch.getPharmacys(this, 1)
     }
   },
   head() {
