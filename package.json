@@ -24,11 +24,14 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.10.3",
+    "better-scroll": "^1.15.2",
     "cross-env": "^5.2.0",
     "driver.js": "^0.9.8",
     "express": "^4.16.4",
+    "mockjs": "^1.1.0",
     "mta-h5-analysis": "^2.0.15",
     "nuxt": "^2.0.0",
+    "nuxt-property-decorator": "^2.7.2",
     "ua-parser-js": "^0.7.21",
     "vant": "^2.8.1",
     "weixin-js-sdk": "^1.4.0-test"

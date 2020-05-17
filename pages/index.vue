@@ -30,6 +30,7 @@
   avatar-shape	头像占位图形状，可选值为square	string	round
    */
 import { Button, NavBar } from 'vant'
+import { uaParser } from '~/transformers/ua'
 export default {
   components: {
     'van-button': Button,
@@ -41,7 +42,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$mat, this)
+    console.log(this.$mat, uaParser(navigator.userAgent))
     // this.$toast('66666')
     // this.$confirm({ message: '弹窗内容' })
   },
