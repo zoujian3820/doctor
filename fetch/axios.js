@@ -1,4 +1,4 @@
-import { isObject } from '../unitils'
+import { isObject } from '../untils'
 
 export const CODE302 = 302
 export const CODE401 = 401

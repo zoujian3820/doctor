@@ -45,7 +45,8 @@ echo > commitlint.config.js
 }
 ```
 
-**webstorm+Prettier+ESLint实现保存格式化代码**
+**webstorm+Prettier+ESLint 实现保存格式化代码**
+
 ```
 Prettier
 File” >> "Settings" >> "Tools" >> "File Watchers" >> 新建 Prettier
