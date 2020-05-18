@@ -42,3 +42,10 @@
   justify-content: $justifyContent;
   align-items: $alignItems;
 }
+
+@mixin format-page($backgroundColor: #ffffff) {
+  display: flex;
+  flex-direction: column;
+  background: $backgroundColor;
+  min-height: 100%;
+}

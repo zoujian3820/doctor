@@ -1,12 +1,16 @@
-const isDev = !(process.env.NODE_ENV === 'production')
 const path = require('path')
+const ENV = require('./env')
+const isDev = ENV.env !== 'production'
 const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
   mode: 'universal',
   server: {
-    host: '0.0.0.0',
-    port: 3000
+    host: ENV.host,
+    port: ENV.port
+  },
+  env: {
+    baseURL: ENV.baseURL
   },
   router: {
     base: '/kwdoctor/'
@@ -58,7 +62,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     prefix: isDev ? '/api/' : '/',
@@ -70,8 +74,7 @@ module.exports = {
     credentials: true
   },
   proxy: {
-    '/api/': { target: 'http://localhost:6484', pathRewrite: { '^/api/': '' } }
-    // '/api/': { target: 'http://localhost:3000', pathRewrite: { '^/api/': '' } }
+    '/api/': { target: ENV.proxy, pathRewrite: { '^/api/': '' } }
   },
   /*
    ** Build configuration

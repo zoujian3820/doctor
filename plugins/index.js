@@ -5,3 +5,5 @@ import './mtah5'
 import './rem'
 
 import './extend'
+
+import './vScroll'

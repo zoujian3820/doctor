@@ -5,10 +5,11 @@ body {
 
 .page {
   margin: 0 auto;
-  min-height: 100vh;
   font-size: $font-size-base;
   line-height: $line-height-base;
   -webkit-font-smoothing: antialiased;
+  @include format-page;
+  min-height: 100vh;
 }
 
 .iconfont {

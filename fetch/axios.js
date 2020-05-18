@@ -13,7 +13,8 @@ export default (app) => {
   const query = axios.query || (route && route.query) || ''
   const { miniToken } = query
 
-  // axios.defaults.baseURL = ''
+  // 域名 + 前缀 /api/
+  axios.defaults.baseURL = process.env.baseURL + axios.defaults.baseURL
 
   // 用于小程序给微信公众号登录token
   miniToken && axios.setHeader('Minitoken', miniToken)
