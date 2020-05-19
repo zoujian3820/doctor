@@ -1,21 +1,38 @@
 <template>
-  <div class="page">
-    <div>
-      {{ 'dddd' | firstUpperCase }}
-    </div>
-    <van-button type="primary" @click="preview">主要按f钮</van-button>
-    <div class="demo">
-      <van-skeleton avatar title :row="3" :loading="loading" avatar-size="40px">
-        <div class="title">实际内容实际内容实际内容实际内容实际内容</div>
-      </van-skeleton>
-    </div>
-    <div class="demo">
-      <van-skeleton avatar title :row="3" :loading="loading" avatar-size="40px">
-        <div class="title">实际内容实际内容实际内容实际内容实际内容</div>
-      </van-skeleton>
-    </div>
-    <van-nav-bar title="标题" left-text="返回" right-text="按钮" left-arrow />
-  </div>
+  <v-page>
+    <template slot="navbar">
+      <p>header</p>
+    </template>
+    <template slot="content">
+      <div>
+        {{ 'dddd' | firstUpperCase }}
+      </div>
+      <van-button type="primary" @click="preview">主要按f钮</van-button>
+      <div class="demo">
+        <van-skeleton
+          avatar
+          title
+          :row="3"
+          :loading="loading"
+          avatar-size="40px"
+        >
+          <div class="title">实际内容实际内容实际内容实际内容实际内容</div>
+        </van-skeleton>
+      </div>
+      <div class="demo">
+        <van-skeleton
+          avatar
+          title
+          :row="3"
+          :loading="loading"
+          avatar-size="40px"
+        >
+          <div class="title">实际内容实际内容实际内容实际内容实际内容</div>
+        </van-skeleton>
+      </div>
+      <van-nav-bar title="标题" left-text="返回" right-text="按钮" left-arrow />
+    </template>
+  </v-page>
 </template>
 
 <script>
@@ -33,7 +50,6 @@ import { Button, NavBar } from 'vant'
 import { mapGetters, mapState, mapMutations, mapActions } from 'vuex'
 import storage from 'good-storage'
 import { uaParser } from '~/transformers/ua'
-
 export default {
   components: {
     'van-button': Button,

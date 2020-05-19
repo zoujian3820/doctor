@@ -5,11 +5,7 @@
     </template>
     <template slot="content">
       <ul>
-        <li>555</li>
-        <li>555</li>
-        <li>555</li>
-        <li>555</li>
-        <li>555</li>
+        <li v-for="i in 100" :key="i">{{ i }}</li>
       </ul>
     </template>
   </v-page>
@@ -17,10 +13,9 @@
 
 <script>
 // import timeout from '~/untils/timeout'
-import vPage from '~/components/v-page'
 export default {
   name: 'Index',
-  components: { vPage },
+  components: {},
   computed: {},
   mounted() {
     // const itme = timeout.setInterval.set(() => {

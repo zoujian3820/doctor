@@ -282,6 +282,7 @@ export default {
 <style scoped>
 .scroll-wrapper {
   height: 100%;
+  max-height: 100%;
   width: 100%;
   flex: 1;
   overflow: hidden;

@@ -10,6 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   @include format-page;
   min-height: 100vh;
+  max-height: 100vh;
 }
 
 .iconfont {

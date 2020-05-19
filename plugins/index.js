@@ -7,3 +7,5 @@ import './rem'
 import './extend'
 
 import './vScroll'
+
+import './vPage'

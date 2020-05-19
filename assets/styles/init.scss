@@ -1,3 +1,6 @@
+/*
+此处的scss可在页面开发中直接复用
+*/
 @charset "UTF-8";
 
 // variables
@@ -5,3 +8,5 @@
 
 // mixins
 @import 'mixins.scss';
+
+@import 'theme.scss';
