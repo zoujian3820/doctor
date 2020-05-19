@@ -31,13 +31,13 @@ export default {
     }
   },
   created () {
-    this._init()
+    this._vinit()
   },
   mounted () {
     this._draw()
   },
   methods: {
-    _init(){
+    _vinit(){
       if(process.client) {
         this.ratio = window.devicePixelRatio
         this.width *= this.ratio
