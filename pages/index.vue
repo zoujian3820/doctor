@@ -1,5 +1,20 @@
 <template>
-  <v-page>
+  <v-page
+    :pulling-cb="pullingCb"
+    pulling-api="getPharmacys"
+    :pull-down-refresh="{
+      threshold: 90,
+      stop: 40,
+      txt: '刷新了'
+    }"
+    :pull-up-load="{
+      threshold: 0,
+      txt: {
+        more: '加载更多...',
+        noMore: '没有更多数据啦'
+      }
+    }"
+  >
     <template slot="navbar">
       <p>header</p>
     </template>
@@ -57,7 +72,30 @@ export default {
   },
   data() {
     return {
-      loading: true
+      loading: true,
+      // 这个配置可以开启滚动条，默认为 false。当设置为 true 或者是一个 Object 的时候，都会开启滚动条，默认是会 fade 的
+      scrollbarObj: {
+        fade: true
+      },
+      // 这个配置用于做下拉刷新功能，默认为 false。当设置为 true 或者是一个 Object 的时候，可以开启下拉刷新，可以配置顶部下拉的距离（threshold） 来决定刷新时机以及回弹停留的距离（stop）
+      pullDownRefreshObj: {
+        threshold: 90,
+        stop: 40,
+        txt: '刷新了哈'
+      },
+      // 这个配置用于做上拉加载功能，默认为 false。当设置为 true 或者是一个 Object 的时候，可以开启上拉加载，可以配置离底部距离阈值（threshold）来决定开始加载的时机
+      pullUpLoadObj: {
+        threshold: 0,
+        txt: {
+          more: '加载更多...',
+          noMore: '没有更多数据啦'
+        }
+      },
+      startY: 0, // 纵轴方向初始化位置
+      scrollToX: 0,
+      scrollToY: 0,
+      scrollToTime: 700,
+      items: []
     }
   },
   computed: {
@@ -69,6 +107,7 @@ export default {
   },
   mounted() {
     console.log(this.$mat, uaParser(navigator.userAgent))
+    console.log(this['onlinePrescription/selectHerbs'])
     console.log(this.selectHerbs)
     console.log(this.$store.state.onlinePrescription.selectHerbs)
 
@@ -85,6 +124,7 @@ export default {
     console.log(storage.get('test0', '123'))
   },
   methods: {
+    pullingCb(handleCb) {},
     ...mapMutations({
       updateSelectHerbs: 'onlinePrescription/updateSelectHerbs'
     }),

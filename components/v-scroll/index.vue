@@ -10,7 +10,7 @@
             <span>{{ pullUpTxt }}</span>
           </div>
           <div v-else class="after-trigger">
-            <img class="scroll-loading" src="image/loading.gif" />
+            <img class="scroll-loading" src="./image/loading.gif" />
           </div>
         </div>
       </slot>
@@ -34,7 +34,7 @@
         </div>
         <div v-else class="after-trigger">
           <div v-if="pulling" class="loading">
-            <img class="scroll-loading" src="image/loading.gif" />
+            <img class="scroll-loading" src="./image/loading.gif" />
           </div>
           <div v-else>
             <span>{{ refreshTxt }}</span>

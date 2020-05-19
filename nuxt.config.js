@@ -1,6 +1,6 @@
 const path = require('path')
 const ENV = require('./env')
-const isDev = ENV.env !== 'production'
+// const isDev = ENV.env !== 'production'
 const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
@@ -10,7 +10,8 @@ module.exports = {
     port: ENV.port
   },
   env: {
-    baseURL: ENV.baseURL
+    baseURL: ENV.baseURL,
+    prefix: ENV.prefix
   },
   router: {
     base: '/kwdoctor/'
@@ -65,7 +66,7 @@ module.exports = {
   modules: ['@nuxtjs/axios', '@nuxtjs/style-resources'],
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    prefix: isDev ? '/api/' : '/',
+    prefix: ENV.prefix,
     debug: false,
     proxy: true,
     progress: false,

@@ -5,7 +5,16 @@
     </NavBar>
     <slot v-else name="navbar"></slot>
     <main class="page-main">
-      <v-scroll ref="scroll">
+      <v-scroll
+        ref="scroll"
+        :scrollbar="scrollbar"
+        :pull-down-refresh="pullDownRefresh"
+        :pull-up-load="pullUpLoad"
+        :start-y="parseInt(startY)"
+        :click="click"
+        @pulling-down="onPullingDown"
+        @pulling-up="onPullingUp"
+      >
         <slot name="content"></slot>
       </v-scroll>
     </main>
@@ -19,18 +28,154 @@
 
 <script>
 import { NavBar } from 'vant'
+
+// const count = 1
 export default {
   name: 'VPage',
   components: { NavBar },
-  computed: {
-    needHeader() {
-      this.refresh()
-      return this.$store.state.vPage.needHeader
+  props: {
+    needHeader: {
+      type: null,
+      default: false
+    },
+    // 分页单次get条目数
+    pageSize: {
+      type: Number,
+      default: 10
+    },
+    /**
+     * 下拉刷新 || 上拉加载的 Api
+     * */
+    pullingApi: {
+      type: String,
+      default: ''
+    },
+    /**
+     * 下拉刷新 || 上拉加载的 回调
+     * */
+    pullingCb: {
+      type: Function,
+      default: null
+    },
+    /**
+     * pullDownRefresh
+     * 这个配置用于做下拉刷新功能，默认为 false。当设置为 true 或者是一个 Object 的时候，
+     * 可以开启下拉刷新，可以配置顶部下拉的距离（threshold） 来决定刷新时机以及回弹停留的距离（stop）
+     * {
+     *   threshold: 90,
+     *   stop: 40,
+     *   txt: '刷新了'
+     * }
+     * */
+    pullDownRefresh: {
+      type: null,
+      default: false
+    },
+    /**
+     * pullUpLoad
+     * 这个配置用于做上拉加载功能，默认为 false。当设置为 true 或者是一个 Object 的时候，
+     * 可以开启上拉加载，可以配置离底部距离阈值（threshold）来决定开始加载的时机
+     * {
+     *   threshold: 0,
+     *   txt: {
+     *     more: '加载更多...',
+     *     noMore: '没有更多数据啦'
+     *   }
+     * }
+     * */
+    pullUpLoad: {
+      type: null,
+      default: false
+    },
+    // 是否开启滚动条，默认为 false
+    scrollbar: {
+      type: null,
+      default: false
+    },
+    // 纵轴方向初始化位置
+    startY: {
+      type: Number,
+      default: 0
+    },
+    click: {
+      type: Boolean,
+      default: true
     }
+  },
+  data() {
+    return {
+      page: 1,
+      items: []
+    }
+  },
+  watch: {
+    needHeader(newV, oldV) {
+      if (newV !== oldV) {
+        this.refresh()
+      }
+    }
+  },
+  async mounted() {
+    // 开启了上拉加载 || 下拉刷新， 进来都先拉一屏数据下来
+    this.$toast.loading({
+      message: '加载中...',
+      forbidClick: true
+    })
+    if (this.pullDownRefresh || this.pullUpLoad) {
+      await this.onPullingDown()
+    }
+    this.$toast.clear()
   },
   methods: {
     refresh() {
-      this.$refs.scroll && this.$refs.scroll.refresh()
+      this.$nextTick(() => {
+        this.$refs.scroll && this.$refs.scroll.refresh()
+      })
+    },
+    // 滚动到页面顶部
+    scrollTo({ scrollToX, scrollToY, scrollToTime }) {
+      this.$nextTick(() => {
+        this.$refs.scroll.scrollTo(scrollToX, scrollToY, scrollToTime)
+      })
+    },
+    onPullingDown() {
+      // 模拟下拉刷新
+      console.log('下拉刷新')
+      const pageSize = this.pageSize
+      this.page = 1
+      this.$fetch[this.pullingApi](this, this.page, pageSize).then(
+        ({ data, ...res }) => {
+          this.page++
+          this.pullingCb((list) => {
+            list.splice(0, list.length, ...data)
+          })
+          this.forceUpdate(true)
+        }
+      )
+    },
+    onPullingUp() {
+      // 模拟上拉 加载更多数据
+      console.log('上拉加载')
+      if (!this.pullingApi) return
+      const pageSize = this.pageSize
+      this.$fetch[this.pullingApi](this, this.page, pageSize).then(
+        ({ data, ...res }) => {
+          this.page++
+          this.pullingCb((list) => {
+            list.push(...data)
+          })
+          if (data.length < pageSize) {
+            this.forceUpdate(false)
+          } else {
+            this.forceUpdate(true)
+          }
+        }
+      )
+    },
+    forceUpdate() {
+      this.$nextTick((bool) => {
+        this.$refs.scroll.forceUpdate(bool)
+      })
     }
   }
 }

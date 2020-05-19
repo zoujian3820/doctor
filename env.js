@@ -6,17 +6,20 @@ const HOST = 'localhost'
 const apisMap = {
   dev: {
     proxy: 'http://localhost:6484',
-    baseURL: `http://${HOST}:${PORT}`
+    baseURL: `http://${HOST}:${PORT}`,
+    prefix: '/api/'
   },
   development: {
-    baseURL: 'https://wxdev.kuaiwen.cn'
+    baseURL: 'https://wxdev.kuaiwen.cn',
+    prefix: '/'
   },
   testelopment: {
-    proxy: 'http://localhost:8888',
-    baseURL: 'https://wxtest.kuaiwen.cn'
+    baseURL: 'https://wxtest.kuaiwen.cn',
+    prefix: '/'
   },
   production: {
-    baseURL: 'https://wx.kw13.cn'
+    baseURL: 'https://wx.kw13.cn',
+    prefix: '/'
   }
 }
 
