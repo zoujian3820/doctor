@@ -1,7 +1,7 @@
 <template>
   <v-page
     :pulling-cb="pullingCb"
-    pulling-api="getPharmacys"
+    pulling-api="getArticles"
     :pull-down-refresh="{
       threshold: 90,
       stop: 40,
@@ -23,18 +23,7 @@
         {{ 'dddd' | firstUpperCase }}
       </div>
       <van-button type="primary" @click="preview">主要按f钮</van-button>
-      <div class="demo">
-        <van-skeleton
-          avatar
-          title
-          :row="3"
-          :loading="loading"
-          avatar-size="40px"
-        >
-          <div class="title">实际内容实际内容实际内容实际内容实际内容</div>
-        </van-skeleton>
-      </div>
-      <div class="demo">
+      <div v-for="(item, index) in list" :key="index" class="demo">
         <van-skeleton
           avatar
           title
@@ -63,8 +52,9 @@
    */
 import { Button, NavBar } from 'vant'
 import { mapGetters, mapState, mapMutations, mapActions } from 'vuex'
-import storage from 'good-storage'
-import { uaParser } from '~/transformers/ua'
+// import storage from 'good-storage'
+import { isFunction } from '~/untils/'
+// import { uaParser } from '~/transformers/ua'
 export default {
   components: {
     'van-button': Button,
@@ -95,7 +85,7 @@ export default {
       scrollToX: 0,
       scrollToY: 0,
       scrollToTime: 700,
-      items: []
+      list: []
     }
   },
   computed: {
@@ -106,25 +96,26 @@ export default {
     ...mapGetters(['onlinePrescription/selectHerbs'])
   },
   mounted() {
-    console.log(this.$mat, uaParser(navigator.userAgent))
-    console.log(this['onlinePrescription/selectHerbs'])
-    console.log(this.selectHerbs)
-    console.log(this.$store.state.onlinePrescription.selectHerbs)
-
-    this.fetchAllHerbs({
-      remove: 0,
-      mid: 1,
-      pharmacyId: 2
-    })
-    this.$store.commit('onlinePrescription/updateSelectHerbs', [1, 2])
-    this.$store.dispatch('onlinePrescription/fetchAllHerbs', { remove: 1 })
+    // console.log(this.$mat, uaParser(navigator.userAgent))
+    // console.log(this['onlinePrescription/selectHerbs'])
+    // console.log(this.selectHerbs)
+    // console.log(this.$store.state.onlinePrescription.selectHerbs)
+    // this.fetchAllHerbs({
+    //   remove: 0,
+    //   mid: 1,
+    //   pharmacyId: 2
+    // })
+    // this.$store.commit('onlinePrescription/updateSelectHerbs', [1, 2])
+    // this.$store.dispatch('onlinePrescription/fetchAllHerbs', { remove: 1 })
     // this.$toast('66666')
     // this.$confirm({ message: '弹窗内容' })
-    storage.set('test0', 'abc')
-    console.log(storage.get('test0', '123'))
+    // storage.set('test0', 'abc')
+    // console.log(storage.get('test0', '123'))
   },
   methods: {
-    pullingCb(handleCb) {},
+    pullingCb(handleCb) {
+      isFunction(handleCb) && handleCb(this.list)
+    },
     ...mapMutations({
       updateSelectHerbs: 'onlinePrescription/updateSelectHerbs'
     }),

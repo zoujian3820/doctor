@@ -11,6 +11,7 @@ module.exports = {
   },
   env: {
     baseURL: ENV.baseURL,
+    API_URL: ENV.baseURL, // 环境变量 API_URL 可以覆盖 override baseURL设置
     prefix: ENV.prefix
   },
   router: {
@@ -50,7 +51,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@plugins'],
+  plugins: ['@plugins', '@plugins/axios'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -75,7 +76,7 @@ module.exports = {
     credentials: true
   },
   proxy: {
-    '/api/': { target: ENV.proxy, pathRewrite: { '^/api/': '' } }
+    [ENV.prefix]: { target: ENV.proxy, pathRewrite: { [`^${ENV.prefix}`]: '' } }
   },
   /*
    ** Build configuration

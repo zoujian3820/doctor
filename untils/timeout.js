@@ -33,7 +33,7 @@ const api = {
     this.timers.push(timer)
     const fnStr = this.toStr(fn)
     const fnTimes = this.fnTimes[fnStr] || []
-    this.fnTimes[fnStr] = fnTimes.push(timer)
+    this.fnTimes[fnStr] = [...fnTimes, timer]
     return timer
   },
   remove(timer) {

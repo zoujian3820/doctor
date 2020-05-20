@@ -28,8 +28,9 @@
 
 <script>
 import { NavBar } from 'vant'
+import { isObject, isArray } from '~/untils'
+import timeout from '~/untils/timeout'
 
-// const count = 1
 export default {
   name: 'VPage',
   components: { NavBar },
@@ -37,6 +38,11 @@ export default {
     needHeader: {
       type: null,
       default: false
+    },
+    // 需要扩展的分页参数
+    expanParams: {
+      type: Object,
+      default: null
     },
     // 分页单次get条目数
     pageSize: {
@@ -117,10 +123,7 @@ export default {
   },
   async mounted() {
     // 开启了上拉加载 || 下拉刷新， 进来都先拉一屏数据下来
-    this.$toast.loading({
-      message: '加载中...',
-      forbidClick: true
-    })
+    this.$loading()
     if (this.pullDownRefresh || this.pullUpLoad) {
       await this.onPullingDown()
     }
@@ -141,36 +144,68 @@ export default {
     onPullingDown() {
       // 模拟下拉刷新
       console.log('下拉刷新')
-      const pageSize = this.pageSize
       this.page = 1
-      this.$fetch[this.pullingApi](this, this.page, pageSize).then(
-        ({ data, ...res }) => {
+      this.getData().then(({ data, ...res }) => {
+        try {
           this.page++
           this.pullingCb((list) => {
             list.splice(0, list.length, ...data)
           })
           this.forceUpdate(true)
+        } catch (e) {
+          console.log(e, '下拉刷新pullingCb')
         }
-      )
+      })
     },
     onPullingUp() {
       // 模拟上拉 加载更多数据
       console.log('上拉加载')
       if (!this.pullingApi) return
       const pageSize = this.pageSize
-      this.$fetch[this.pullingApi](this, this.page, pageSize).then(
-        ({ data, ...res }) => {
-          this.page++
-          this.pullingCb((list) => {
-            list.push(...data)
-          })
-          if (data.length < pageSize) {
-            this.forceUpdate(false)
-          } else {
-            this.forceUpdate(true)
-          }
+      this.getData().then(({ data, ...res }) => {
+        this.page++
+        this.pullingCb((list) => {
+          list.push(...data)
+        })
+        if (data.length < pageSize) {
+          this.forceUpdate(false)
+        } else {
+          this.forceUpdate(true)
         }
-      )
+      })
+    },
+    fetch(params = {}) {
+      return this.$fetch[this.pullingApi](this, {
+        page: this.page,
+        perPage: this.pageSize,
+        ...params
+      })
+        .then(({ data: { data, ...res }, success }) => {
+          try {
+            if (isArray(data)) {
+              const timer = timeout.setTimeout.set(() => {
+                this.refresh()
+                timeout.setInterval.remove(timer)
+              }, 200)
+              return Promise.resolve({ data, ...res })
+            } else {
+              throw new Error('property data: not Array')
+            }
+          } catch (e) {
+            return Promise.resolve({ data: [] })
+          }
+        })
+        .catch((err) => {
+          return Promise.reject(err)
+        })
+    },
+    getData() {
+      const params = this.expanParams
+      if (isObject(params)) {
+        return this.fetch(params)
+      } else {
+        return this.fetch()
+      }
     },
     forceUpdate() {
       this.$nextTick((bool) => {

@@ -42,6 +42,13 @@ Vue.prototype.$confirm = ({ ...params }) => {
   return Dialog.alert(params)
 }
 
+Vue.prototype.$loading = (message = '加载中...') => {
+  return Toast.loading({
+    message,
+    forbidClick: true
+  })
+}
+
 /**
  * @params
  * images: [

@@ -1,29 +1,24 @@
 import { isObject } from '../untils'
-
 export const CODE302 = 302
 export const CODE401 = 401
 export const CODE403 = 403
 
-export default (app) => {
-  const axios = app.$axios
+export default function({ $axios, app, query, route, redirect, ...context }) {
   const toast = app.$toast
-  const route = app.$route
   const navigateTo = app.navigateTo
   const navigateRepl = app.navigateRepl
-  const query = axios.query || (route && route.query) || ''
-  const { miniToken } = query
 
-  // 域名 + 前缀 /api/
-  axios.defaults.baseURL = process.env.baseURL + process.env.prefix
+  const querys = query || route.query || ''
+  const { miniToken } = querys
 
   // 用于小程序给微信公众号登录token
-  miniToken && axios.setHeader('Minitoken', miniToken)
+  miniToken && $axios.setHeader('Minitoken', miniToken)
 
-  axios.setHeader('X-Requested-With', 'XMLHttpRequest')
-  axios.setHeader('Content-Type', 'application/json;charset=UTF-8')
+  $axios.setHeader('X-Requested-With', 'XMLHttpRequest')
+  $axios.setHeader('Content-Type', 'application/json;charset=UTF-8')
 
   // 注册状态回调
-  axios.onRequest((config) => {
+  $axios.onRequest((config) => {
     const code = route && route.query && route.query.code
     if (code) {
       if (config.method === 'get') {
@@ -41,7 +36,7 @@ export default (app) => {
     return config
   })
 
-  axios.interceptors.request.use(
+  $axios.interceptors.request.use(
     (config) => {
       switch (config.method) {
         case 'post':
@@ -66,7 +61,7 @@ export default (app) => {
     }
   )
   // 拦截响应
-  axios.interceptors.response.use((response) => {
+  $axios.interceptors.response.use((response) => {
     const { data } = response
     if (data && data.success === false) {
       // 不带特殊异常码时，直接toast到页面
@@ -79,7 +74,7 @@ export default (app) => {
     return response.data
   })
 
-  axios.onError((error) => {
+  $axios.onError((error) => {
     const code = Number(error.response && error.response.status)
 
     const redirectUrl =
@@ -101,13 +96,11 @@ export default (app) => {
     }
   })
 
-  axios.onRequestError((error) => {
+  $axios.onRequestError((error) => {
     console.error('onRequestError...', error)
   })
 
-  axios.onResponseError((error) => {
+  $axios.onResponseError((error) => {
     console.error('onResponseError...', error)
   })
-
-  return axios
 }
