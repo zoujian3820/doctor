@@ -2,26 +2,25 @@
   <v-page
     :pulling-cb="pullingCb"
     pulling-api="getArticles"
-    :pull-down-refresh="{
-      threshold: 90,
-      stop: 40,
-      txt: '刷新了'
-    }"
-    :pull-up-load="{
-      threshold: 0,
-      txt: {
-        more: '加载更多...',
-        noMore: '没有更多数据啦'
-      }
-    }"
+    :need-header="true"
+    :pull-down-refresh="pullDownRefreshObj"
+    :pull-up-load="pullUpLoadObj"
   >
-    <template slot="navbar">
-      <p>header</p>
+    <template slot="navbar-left">
+      <van-icon name="arrow-left" size="18" />
     </template>
+    <template slot="navbar-title">
+      <p>title</p>
+    </template>
+    <template slot="navbar-right">
+      <van-icon name="search" size="18" />
+    </template>
+
     <template slot="content">
       <div>
         {{ 'dddd' | firstUpperCase }}
       </div>
+      <van-nav-bar title="标题" left-text="返回" right-text="按钮" left-arrow />
       <van-button type="primary" @click="preview">主要按f钮</van-button>
       <div v-for="(item, index) in list" :key="index" class="demo">
         <van-skeleton
@@ -34,7 +33,6 @@
           <div class="title">实际内容实际内容实际内容实际内容实际内容</div>
         </van-skeleton>
       </div>
-      <van-nav-bar title="标题" left-text="返回" right-text="按钮" left-arrow />
     </template>
   </v-page>
 </template>
@@ -50,15 +48,16 @@
   avatar-size	头像占位图大小	number | string	32px
   avatar-shape	头像占位图形状，可选值为square	string	round
    */
-import { Button, NavBar } from 'vant'
+import { Button, NavBar, icon } from 'vant'
 import { mapGetters, mapState, mapMutations, mapActions } from 'vuex'
 // import storage from 'good-storage'
 import { isFunction } from '~/untils/'
 // import { uaParser } from '~/transformers/ua'
 export default {
   components: {
-    'van-button': Button,
-    [NavBar.name]: NavBar
+    [Button.name]: Button,
+    [NavBar.name]: NavBar,
+    [icon.name]: icon
   },
   data() {
     return {
@@ -81,10 +80,6 @@ export default {
           noMore: '没有更多数据啦'
         }
       },
-      startY: 0, // 纵轴方向初始化位置
-      scrollToX: 0,
-      scrollToY: 0,
-      scrollToTime: 700,
       list: []
     }
   },

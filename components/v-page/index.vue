@@ -1,8 +1,16 @@
 <template>
   <div class="page">
-    <NavBar v-if="needHeader">
-      <slot name="navbar"></slot>
-    </NavBar>
+    <van-nav-bar v-if="needHeader">
+      <template #left>
+        <slot name="navbar-left"></slot>
+      </template>
+      <template #title>
+        <slot name="navbar-title"></slot>
+      </template>
+      <template #right>
+        <slot name="navbar-right"></slot>
+      </template>
+    </van-nav-bar>
     <slot v-else name="navbar"></slot>
     <main class="page-main">
       <v-scroll
@@ -18,25 +26,21 @@
         <slot name="content"></slot>
       </v-scroll>
     </main>
-    <!--    <slot name="header"></slot>-->
-
-    <!--    <template slot="header">-->
-    <!--      <p>我是name为header的slot</p>-->
-    <!--    </template>-->
   </div>
 </template>
 
 <script>
 import { NavBar } from 'vant'
 import { isObject, isArray } from '~/untils'
-import timeout from '~/untils/timeout'
 
 export default {
   name: 'VPage',
-  components: { NavBar },
+  components: {
+    [NavBar.name]: NavBar
+  },
   props: {
     needHeader: {
-      type: null,
+      type: Boolean,
       default: false
     },
     // 需要扩展的分页参数
@@ -143,7 +147,6 @@ export default {
     },
     onPullingDown() {
       // 模拟下拉刷新
-      console.log('下拉刷新')
       this.page = 1
       this.getData().then(({ data, ...res }) => {
         try {
@@ -151,15 +154,15 @@ export default {
           this.pullingCb((list) => {
             list.splice(0, list.length, ...data)
           })
-          this.forceUpdate(true)
         } catch (e) {
           console.log(e, '下拉刷新pullingCb')
+        } finally {
+          this.forceUpdate(true)
         }
       })
     },
     onPullingUp() {
       // 模拟上拉 加载更多数据
-      console.log('上拉加载')
       if (!this.pullingApi) return
       const pageSize = this.pageSize
       this.getData().then(({ data, ...res }) => {
@@ -183,10 +186,6 @@ export default {
         .then(({ data: { data, ...res }, success }) => {
           try {
             if (isArray(data)) {
-              const timer = timeout.setTimeout.set(() => {
-                this.refresh()
-                timeout.setInterval.remove(timer)
-              }, 200)
               return Promise.resolve({ data, ...res })
             } else {
               throw new Error('property data: not Array')
@@ -222,5 +221,8 @@ export default {
   flex: 1;
   max-height: 100%;
   overflow: hidden;
+}
+.van-nav-bar {
+  min-height: 46px;
 }
 </style>

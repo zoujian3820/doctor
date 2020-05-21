@@ -36,7 +36,7 @@
           <div v-if="pulling" class="loading">
             <img class="scroll-loading" src="./image/loading.gif" />
           </div>
-          <div v-else>
+          <div v-else class="refresh-txt">
             <span>{{ refreshTxt }}</span>
           </div>
         </div>
@@ -204,12 +204,18 @@ export default {
     destroy() {
       this.scroll && this.scroll.destroy()
     },
+    _notify() {
+      const message =
+        (this.pullDownRefresh && this.pullDownRefresh.txt) || '刷新成功'
+      this.$notify({ type: 'success', message })
+    },
     // 加载数据后更新
     forceUpdate(dirty) {
       this.$nextTick(() => {
         this.pullUpDirty = dirty
         if (this.pullDownRefresh && this.isPullingDown) {
           this.pulling = false
+          // this._notify()
           this._reboundPullDown().then(() => {
             this._afterPullDown()
           })
@@ -286,6 +292,7 @@ export default {
   width: 100%;
   flex: 1;
   overflow: hidden;
+  position: relative;
 }
 
 .scroll-loading {
