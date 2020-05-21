@@ -1,7 +1,7 @@
 <template>
   <v-page
     :pulling-cb="pullingCb"
-    pulling-api="getArticles"
+    pulling-api="getDoctorArticles"
     :need-header="true"
     :pull-down-refresh="pullDownRefreshObj"
     :pull-up-load="pullUpLoadObj"

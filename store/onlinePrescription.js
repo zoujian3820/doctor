@@ -24,7 +24,7 @@ export const actions = {
       return commit('updateAllHerbs', [])
     }
     this._vm.$fetch
-      .getAllHerbs(this, payload)
+      .getDoctorAllHerbs(this, payload)
       .then(({ data: { herbs } }) => {
         commit('updateAllHerbs', herbs)
       })

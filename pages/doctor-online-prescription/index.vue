@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     async getPharmacy() {
-      const data = await this.$fetch.getPharmacys(this, 1)
+      const data = await this.$fetch.getDoctorPharmacys(this, 1)
       console.log(data)
     }
   },
