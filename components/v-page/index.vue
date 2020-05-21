@@ -207,8 +207,8 @@ export default {
         return this.fetch()
       }
     },
-    forceUpdate() {
-      this.$nextTick((bool) => {
+    forceUpdate(bool) {
+      this.$nextTick(() => {
         this.$refs.scroll.forceUpdate(bool)
       })
     }
