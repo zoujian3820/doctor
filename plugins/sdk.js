@@ -18,6 +18,4 @@ if (isToutiao) {
   // }
 }
 
-if (typeof window !== 'undefined') {
-  Vue.use(plugin)
-}
+Vue.use(plugin)

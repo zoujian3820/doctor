@@ -13,4 +13,4 @@ import './vScroll'
 import './vPage'
 
 // 注册微信和头条jsdk
-import './sdk'
+// import './sdk'
