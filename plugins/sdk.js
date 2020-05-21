@@ -10,12 +10,12 @@ const plugin = {
 }
 
 if (isToutiao) {
-  // require('~/static/lib/tmajssdk.js')
-  // const install = plugin.install
-  // plugin.install = (Vue) => {
-  //   install(Vue)
-  //   Vue.prototype.$toutiao = window.toutiao
-  // }
+  require('~/static/lib/tmajssdk.js')
+  const install = plugin.install
+  plugin.install = (Vue) => {
+    install(Vue)
+    Vue.prototype.$toutiao = window.toutiao
+  }
 }
 
 Vue.use(plugin)

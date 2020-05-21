@@ -64,6 +64,29 @@ Vue.prototype.$imagePreview = ({ ...params }) => {
 // 请求接口挂载
 Vue.prototype.$fetch = fetch
 
+Vue.prototype.$navigateTo = function({ path, query = {}, native = false }) {
+  if (!path) return
+  if (native) {
+    window.location.href = path
+  } else {
+    this.$router.push({ path, query })
+  }
+}
+
+Vue.prototype.$navigateBack = function(num = -1) {
+  // num: 0 刷新当前页 正数前进 负数回退
+  this.$router.go(num)
+}
+
+Vue.prototype.$navigateRepl = function({ path, query = {}, native = false }) {
+  if (!path) return
+  if (native) {
+    document.location.replace(path)
+  } else {
+    this.$router.replace({ path, query })
+  }
+}
+
 // filters
 Object.keys(filters).forEach((key) => Vue.filter(key, filters[key]))
 

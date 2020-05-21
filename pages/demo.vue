@@ -21,7 +21,8 @@
         {{ 'dddd' | firstUpperCase }}
       </div>
       <van-nav-bar title="标题" left-text="返回" right-text="按钮" left-arrow />
-      <van-button type="primary" @click="preview">主要按f钮</van-button>
+      <van-button type="primary" @click="preview">看图</van-button>
+      <van-button type="primary" @click="routeLink">link---</van-button>
       <div v-for="(item, index) in list" :key="index" class="demo">
         <van-skeleton
           avatar
@@ -117,6 +118,11 @@ export default {
     ...mapActions({
       fetchAllHerbs: 'onlinePrescription/fetchAllHerbs'
     }),
+    routeLink() {
+      this.$navigateTo({
+        path: '/patient-order-detail'
+      })
+    },
     preview() {
       this.$imagePreview({
         images: [

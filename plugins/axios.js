@@ -3,11 +3,11 @@ export const CODE302 = 302
 export const CODE401 = 401
 export const CODE403 = 403
 
-export default function({ $axios, app, query, route, redirect, ...context }) {
-  const toast = app.$toast
-  const navigateTo = app.navigateTo
-  const navigateRepl = app.navigateRepl
-
+export default function({ $axios, query, route, store }) {
+  const Vm = store._vm
+  const toast = Vm.$toast
+  const navigateTo = Vm.$navigateTo
+  const navigateRepl = Vm.$navigateRepl
   const querys = query || route.query || ''
   const { miniToken } = querys
 
