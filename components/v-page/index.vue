@@ -134,15 +134,21 @@ export default {
     this.$toast.clear()
   },
   methods: {
+    scrollApi() {
+      const args = Array.from(arguments)
+      const api = args[0]
+      args.shift()
+      this.$refs.scroll && this.$refs.scroll[api].call(this.$refs, ...args)
+    },
     refresh() {
       this.$nextTick(() => {
-        this.$refs.scroll && this.$refs.scroll.refresh()
+        this.scrollApi('refresh')
       })
     },
     // 滚动到页面顶部
     scrollTo({ scrollToX, scrollToY, scrollToTime }) {
       this.$nextTick(() => {
-        this.$refs.scroll.scrollTo(scrollToX, scrollToY, scrollToTime)
+        this.scrollApi('scrollTo', scrollToX, scrollToY, scrollToTime)
       })
     },
     onPullingDown() {
@@ -208,7 +214,7 @@ export default {
     },
     forceUpdate(bool) {
       this.$nextTick(() => {
-        this.$refs.scroll.forceUpdate(bool)
+        this.scrollApi('forceUpdate', bool)
       })
     }
   }
