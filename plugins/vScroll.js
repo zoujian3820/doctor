@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import bScroll from '~/components/v-scroll'
+import bScroll from '~/common/v-scroll'
 
 const plugin = {
   install(Vue) {

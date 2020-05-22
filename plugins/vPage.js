@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import vPage from '~/components/v-page'
+import vPage from '~/common/v-page'
 
 const plugin = {
   install(Vue) {
