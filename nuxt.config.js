@@ -57,6 +57,10 @@ module.exports = {
     {
       src: '@/plugins/sdk',
       ssr: false
+    },
+    {
+      src: '@/plugins/router',
+      ssr: false
     }
   ],
   /*
