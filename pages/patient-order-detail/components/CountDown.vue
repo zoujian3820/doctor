@@ -1,7 +1,7 @@
 <template>
   <div v-if="time && state === 'need_pay'" class="time">
     <van-icon name="warn-o" size="14" color="#e14123" />还剩
-    <van-count-down :time="time" format="DD 天 HH 小时 mm 分" />
+    <van-count-down :time="time" format="DD 天 HH 小时 mm 分 SS秒" />
   </div>
   <div v-else-if="state === 'new'" class="time">订单审核后可进行支付</div>
 </template>

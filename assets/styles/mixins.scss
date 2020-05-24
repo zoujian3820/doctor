@@ -49,3 +49,40 @@
   background: $backgroundColor;
   min-height: 100%;
 }
+
+@mixin bg-image(
+  $src: '',
+  $width: 100%,
+  $height: 100%,
+  $size: 100%,
+  $xAxis: center,
+  $yAxis: center
+) {
+  min-width: $width;
+  min-height: $height;
+  display: inline-block;
+  background: url($src) $xAxis $yAxis no-repeat;
+  background-size: $size;
+}
+
+@mixin position(
+  $top: initial,
+  $right: initial,
+  $bottom: initial,
+  $left: initial,
+  $zIndex: 1,
+  $position: fixed
+) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  width: 100%;
+  z-index: $zIndex;
+  position: $position;
+}
+
+@mixin wh($width: 100%, $height: 100%) {
+  width: $width;
+  height: $height;
+}
