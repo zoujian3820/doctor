@@ -1,4 +1,4 @@
-# kwdoctor
+# nuxt微信公众号项目基础框架
 
 > My wicked Nuxt.js project
 
