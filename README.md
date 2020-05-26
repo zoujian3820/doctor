@@ -1,4 +1,4 @@
-# nuxt微信公众号项目基础框架
+# nuxt 微信公众号项目基础框架
 
 > My wicked Nuxt.js project
 
@@ -134,7 +134,7 @@ build: {
   postcss: [
      require('postcss-px2rem-exclude')({
         remUnit: 37.5,
-        exclude: '/node_modules|mint-ui/'
+        exclude: '/node_modules/'
      }),
      require('autoprefixer')
   ]

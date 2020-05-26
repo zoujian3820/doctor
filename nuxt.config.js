@@ -123,7 +123,7 @@ module.exports = {
     postcss: [
       require('postcss-px2rem-exclude')({
         remUnit: 37.5,
-        exclude: '/node_modules|mint-ui/'
+        exclude: '/node_modules/'
       }),
       require('autoprefixer')
     ],
